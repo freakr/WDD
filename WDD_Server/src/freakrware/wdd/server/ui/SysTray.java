@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.net.SocketAddress;
 
 import freakrware.wdd.server.core.ThreadPooledServer;
+import freakrware.wdd.server.resources.DataBase;
 import freakrware.wdd.server.resources.WDD_interface;
 
 
@@ -25,9 +26,11 @@ public class SysTray implements WDD_interface{
 	final static Image IMAGE_START = set_image("A");
 	ThreadPooledServer server;
 	public SocketAddress clientip;
+	private DataBase DB;
 	
-	public SysTray(ThreadPooledServer server) {
+	public SysTray(ThreadPooledServer server, DataBase DB) {
 		this.server = server ;
+		this.DB = DB;
 	}
 	public void start() {
 	
@@ -46,7 +49,7 @@ public class SysTray implements WDD_interface{
             public void actionPerformed(ActionEvent e) {
         		
         		if (server.isStopped()){
-        			server = new ThreadPooledServer(PORT);
+        			server = new ThreadPooledServer(PORT,DB);
         			System.out.println("Starting Server");
         			server.tray = SysTray.this;
         			update("A");
