@@ -1,9 +1,7 @@
 package freakrware.wdd.server.resources;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
-//Lib to work together
+//Interface to work together
 
 public interface WDD_interface {
 	// Socket Commandos
@@ -21,15 +19,13 @@ public interface WDD_interface {
 	public static final String LOCALHOST = "localhost";
 	public static final String HOST = "freakr.spdns.de";
 	public static final int PORT = 15000;
+	public static final int THREAD_POOL_COUNT = 20;
 	// Datenbank 
 	public static final String DB_DRIVER = "org.hsqldb.jdbcDriver";
-	public static final String DB_FOLDER = "StreamsData/";
-	public static final String DB_NAME = "DBStreams";
+	public static final String DB_FOLDER = "WDDData/";
+	public static final String DB_NAME = "DBWDD";
 	// Sonstige
-	public final static String ALLE_FOLGEN = "Alle Folgen";
-	public final static String NEUE_FOLGEN = "Neue Folgen";
-	public final static String NOCH_NICHT_GESEHEN_FOLGEN = "Noch nicht gesehen";
-	public final static String EINSTELLUNGEN = "Einstellungen";
+	public final static String SETUP = "Setup";
 	// Client Parameter
 	static final String ONLINE_THREAD = "Online_Thread";
 	static final String ONLINE_THREAD_NOT_RUNNING = "not_running";
@@ -40,15 +36,5 @@ public interface WDD_interface {
 	final static String SERVERSTATUS = "Serverstatus";
 	final static String SERVERSTATUS_ON = "On";
 	final static String SERVERSTATUS_OFF = "Off";
-	final static String PARAMETER_NEU_TAGE = "STREAMS_NEU_TAGE";
-	final static String PARAMETER_UPDATE_ZEIT = "STREAMS_UPDATE_ZEIT";
-	final static String PARAMETER_WINDOW = "STREAMS_DEFAULT_WINDOW";
-	final static String PARAMETER_IP = "STREAMS_IP";
-	final static String MYAPP = "STREAMS";
-	final static String DEFAULT_NEU_TAGE = "7";
-	final static String DEFAULT_UPDATE_ZEIT = "00:01:00"; // = 00-Tage:01-Stunden:00-Minuten
-	final static String DEFAULT_WINDOW = NOCH_NICHT_GESEHEN_FOLGEN;
-	final static ArrayList<String> TAGELISTE = new ArrayList<String>(Arrays.asList("1","2","3","4","5","6","7","14","30"));
-	final static ArrayList<String> FENSTERLISTE = new ArrayList<String>(Arrays.asList(NOCH_NICHT_GESEHEN_FOLGEN,NEUE_FOLGEN,ALLE_FOLGEN));
 	
 }

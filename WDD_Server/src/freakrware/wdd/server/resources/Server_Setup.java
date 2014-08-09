@@ -2,7 +2,7 @@ package freakrware.wdd.server.resources;
 import java.util.prefs.Preferences;
 
 
-public class Setup_Server_PC {
+public class Server_Setup {
 
 	private Preferences prefs = Preferences.userRoot().node(this.getClass().getName());  
 	

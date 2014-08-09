@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import freakrware.wdd.server.resources.Setup_Server_PC;
+import freakrware.wdd.server.resources.Server_Setup;
 import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
 
@@ -20,10 +20,10 @@ public class WorkerRunnable implements Runnable,WDD_interface{
 
     protected Socket clientSocket = null;
     private SysTray tray;
-	private Setup_Server_PC setup;
+	private Server_Setup setup;
     
 
-    public WorkerRunnable(Socket clientSocket, SysTray tray, Setup_Server_PC setup) {
+    public WorkerRunnable(Socket clientSocket, SysTray tray, Server_Setup setup) {
         this.clientSocket = clientSocket;
         this.tray   = tray;
         this.setup = setup;

@@ -6,20 +6,20 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import freakrware.wdd.server.resources.Setup_Server_PC;
+import freakrware.wdd.server.resources.Server_Setup;
 import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
 
 public class ThreadPooledServer implements Runnable,WDD_interface{
 
-    protected int          serverPort   = 9000;
+    protected int          serverPort;
     protected ServerSocket serverSocket = null;
     protected boolean      isStopped    = false;
     protected Thread       runningThread= null;
     protected ExecutorService threadPool =
-        Executors.newFixedThreadPool(10);
+        Executors.newFixedThreadPool(THREAD_POOL_COUNT);
 	public SysTray tray;
-	public Setup_Server_PC setup = new Setup_Server_PC();
+	public Server_Setup setup = new Server_Setup();
 	
 
     public ThreadPooledServer(int port){

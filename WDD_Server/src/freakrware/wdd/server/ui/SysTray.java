@@ -62,7 +62,7 @@ public class SysTray implements WDD_interface{
         	@Override
             public void actionPerformed(ActionEvent e) {
         		System.out.println("Stopping Server");
-        		update("S");
+        		update("I");
         		server.stop();
         		
             }
