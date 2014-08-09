@@ -116,9 +116,13 @@ public class DataBase implements WDD_interface{
 	protected void initialisiern_datenbank() {
 		 String newFolder = "/"+DB_FOLDER;
 		 String extStorageDirectory = "";
-		 if(Environment.getExternalStorageDirectory()!= null){
-	     extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-	     }
+		 try{
+			 extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+		 }
+		 catch(Exception e){
+			 e.printStackTrace();
+		 }
+	     
 	     File myNewFolder = new File(extStorageDirectory + newFolder);
 	     myNewFolder.mkdir();
 		

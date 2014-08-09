@@ -1,16 +1,10 @@
 package freakrware.wdd.server.core;
 
-import java.awt.Desktop;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import freakrware.wdd.server.resources.DataBase;
 import freakrware.wdd.server.resources.SFCP_Server;
@@ -51,7 +45,7 @@ public class WorkerRunnable implements Runnable,WDD_interface{
             	
             }  
         } catch (IOException e) {
-        	tray.update("A");
+        	tray.update(setup.get_Parameter(SERVERSTATUS));
         	System.out.println(e.getMessage());
         	//e.printStackTrace();
         }

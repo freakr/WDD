@@ -34,7 +34,7 @@ public interface WDD_interface {
 	final static String ONLINESTATUS_ON = "On";
 	final static String ONLINESTATUS_OFF = "Off";
 	final static String SERVERSTATUS = "Serverstatus";
-	final static String SERVERSTATUS_ON = "On";
-	final static String SERVERSTATUS_OFF = "Off";
+	final static String SERVERSTATUS_ON = "A";
+	final static String SERVERSTATUS_OFF = "I";
 	
 }

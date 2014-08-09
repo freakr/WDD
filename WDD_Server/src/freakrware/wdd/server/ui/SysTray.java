@@ -40,6 +40,7 @@ public class SysTray implements WDD_interface{
         ActionListener beenden = new ActionListener() {
         	@Override
             public void actionPerformed(ActionEvent e) {
+        		server.stop();
                 System.exit(0);
         	}
 
