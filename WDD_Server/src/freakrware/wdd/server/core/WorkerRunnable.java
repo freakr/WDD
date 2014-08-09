@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import freakrware.wdd.server.resources.DataBase;
 import freakrware.wdd.server.resources.Server_Setup;
 import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
@@ -21,14 +22,16 @@ public class WorkerRunnable implements Runnable,WDD_interface{
     protected Socket clientSocket = null;
     private SysTray tray;
 	private Server_Setup setup;
+	private DataBase DB;
     
 
-    public WorkerRunnable(Socket clientSocket, SysTray tray, Server_Setup setup) {
+    public WorkerRunnable(Socket clientSocket, SysTray tray, Server_Setup setup, DataBase DB) {
         this.clientSocket = clientSocket;
         this.tray   = tray;
         this.setup = setup;
         this.tray.clientip = clientSocket.getLocalSocketAddress();
-        tray.update("C");
+        this.DB = DB;
+      
     }
 
     public void run() {
@@ -43,99 +46,8 @@ public class WorkerRunnable implements Runnable,WDD_interface{
             	if (serverstatus.equals(SERVERSTATUS_OFF)){
             		line = CONNECTION_CLOSE;
             	}
-            	switch(line){
-            	case CONNECTION_KEEP:
-            		try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-            		output.println(CONNECTION_KEEP);
-            		break;
-            	case CONNECTION_CLOSE:
-            		output.println(CONNECTION_CLOSE);
-            		output.close();
-            		input.close();
-            		break;
-            	case CONNECTION_REQUEST:
-            		output.println(CONNECTION_ACCEPTED);
-            		break;
-            	case OPEN_LINK:
-            		output.println(REQUEST_URL);
-            		line = input.readLine();
-            		URI uri = null;
-					try {
-						uri = new URI(line);
-						if (Desktop.isDesktopSupported()) {
-	            		      try {
-	            		        Desktop.getDesktop().browse(uri);
-	            		      } catch (IOException e) { 
-	            		    	  System.out.println(e.getMessage());
-	            		    	  }
-	            		    } else { 
-	            		    	System.out.println("Kein Desktop gefunden !");
-	            		    	}
-					} catch (URISyntaxException e1) {
-						// TODO Auto-generated catch block
-						System.out.println(e1.getMessage());
-					}
-					output.println(ACTION_COMPLETE);
-            		break;
-            	case DB_UPDATE_FULL:
-            		output.println(REQUEST_DB_FILES);
-            		
-            		String newFolder = DB_FOLDER;
-            	    File myNewFolder = new File(newFolder);
-            	    myNewFolder.mkdir();
-            		            		
-            		BufferedInputStream fileReader = new BufferedInputStream(clientSocket.getInputStream());
-            	    FileWriter writer = new FileWriter(DB_FOLDER+DB_NAME+".lck");
-            	    System.out.println(DB_FOLDER+DB_NAME+".lck");
-            	    int read = 0;
-            	    while ((read = fileReader.read()) != 255) {
-            	        writer.write(read);
-            	        //System.out.println("read " + read + " from socket");
-            	        }
-            	    writer.close();
-            	    output.println(FILE_COMPLETE);
-            	    writer = new FileWriter(DB_FOLDER+DB_NAME+".log");
-            	    System.out.println(DB_FOLDER+DB_NAME+".log");
-            	    read = 0;
-            	    while ((read = fileReader.read()) != 255) {
-            	        writer.write(read);
-            	        //System.out.println("read " + read + " from socket");
-            	        }
-            	    writer.close();
-            	    output.println(FILE_COMPLETE);
-            	    writer = new FileWriter(DB_FOLDER+DB_NAME+".properties");
-            	    System.out.println(DB_FOLDER+DB_NAME+".properties");
-            	    read = 0;
-            	    while ((read = fileReader.read()) != 255) {
-            	        writer.write(read);
-            	        //System.out.println("read " + read + " from socket");
-            	        }
-            	    writer.close();
-            	    output.println(FILE_COMPLETE);
-            	    writer = new FileWriter(DB_FOLDER+DB_NAME+".script");
-            	    System.out.println(DB_FOLDER+DB_NAME+".script");
-            	    read = 0;
-            	    while ((read = fileReader.read()) != 255) {
-            	        writer.write(read);
-            	        //System.out.println("read " + read + " from socket");
-            	        }
-            	    writer.close();
-            	    output.println(FILE_COMPLETE);
-            	    input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                	output = new PrintWriter(clientSocket.getOutputStream(), true);
-            	    output.println(ACTION_COMPLETE);
-            		break;
-            	default :
-            		output.close();
-            		input.close();
-            		output.println(CONNECTION_CLOSE);
-                	break;
-            	}
+            	new SFCP_Server(line,input,output);
+            	
             }  
         } catch (IOException e) {
         	tray.update("A");

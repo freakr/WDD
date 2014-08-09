@@ -26,7 +26,7 @@ public class DataBase implements WDD_interface{
 	        e.printStackTrace();
 	    }
 	}
-	private DataBase(){
+	public DataBase(){
 		
 		initialisiern_datenbank();
 		

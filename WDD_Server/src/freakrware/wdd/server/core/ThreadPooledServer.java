@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import freakrware.wdd.server.resources.DataBase;
 import freakrware.wdd.server.resources.Server_Setup;
 import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
@@ -20,10 +21,12 @@ public class ThreadPooledServer implements Runnable,WDD_interface{
         Executors.newFixedThreadPool(THREAD_POOL_COUNT);
 	public SysTray tray;
 	public Server_Setup setup = new Server_Setup();
+	private DataBase DB;
 	
 
-    public ThreadPooledServer(int port){
+    public ThreadPooledServer(int port, DataBase DB){
         this.serverPort = port;
+        this.DB = DB;
     }
 
     public void run(){
@@ -37,7 +40,7 @@ public class ThreadPooledServer implements Runnable,WDD_interface{
                 clientSocket = this.serverSocket.accept();
             } catch (IOException e) {
                 if(isStopped()) {
-                	tray.update("S");
+                	tray.update("I");
                 	this.threadPool.shutdown();
                     System.out.println("Server Stopped.") ;
                     return;
@@ -47,9 +50,9 @@ public class ThreadPooledServer implements Runnable,WDD_interface{
             }
             
             this.threadPool.execute(
-                new WorkerRunnable(clientSocket,tray,setup));
+                new WorkerRunnable(clientSocket,tray,setup,DB));
         }
-        tray.update("S");
+        tray.update("I");
         this.threadPool.shutdownNow();
         System.out.println("Server Stopped.") ;
     }
@@ -62,10 +65,10 @@ public class ThreadPooledServer implements Runnable,WDD_interface{
     public synchronized void stop(){
         this.isStopped = true;
         try {
-            this.serverSocket.close();
+        	this.serverSocket.close();
             setup.set_Parameter(SERVERSTATUS, SERVERSTATUS_OFF);
             System.out.println(setup.get_Parameter(SERVERSTATUS));
-            tray.update("S");
+            tray.update("I");
         } catch (IOException e) {
             throw new RuntimeException("Error closing server", e);
         }
@@ -75,9 +78,10 @@ public class ThreadPooledServer implements Runnable,WDD_interface{
         try {
             this.serverSocket = new ServerSocket(this.serverPort);
             setup.set_Parameter(SERVERSTATUS, SERVERSTATUS_ON);
+            System.out.println(setup.get_Parameter(SERVERSTATUS));
             tray.update("A");
         } catch (IOException e) {
-            throw new RuntimeException("Cannot open port 9000", e);
+            throw new RuntimeException("Cannot open port "+PORT, e);
         }
     }
 }

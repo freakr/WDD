@@ -1,12 +1,14 @@
 package freakrware.wdd.server.core;
 
+import freakrware.wdd.server.resources.DataBase;
 import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
 
 public class ServerMain implements WDD_interface{
 
 	public static void main(String[] args) {
-		ThreadPooledServer server = new ThreadPooledServer(PORT);
+		DataBase DB = new DataBase();
+		ThreadPooledServer server = new ThreadPooledServer(PORT,DB);
 		SysTray st = new SysTray(server);
 		server.tray = st;
 		st.start();
