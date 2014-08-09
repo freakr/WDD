@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 //Lib to work together
 
-public interface Streams_lib {
+public interface WDD_interface {
 	// Socket Commandos
 	public static final String CONNECTION_CLOSE = "Connection_Close";
 	public static final String CONNECTION_REQUEST = "Connection_Request";

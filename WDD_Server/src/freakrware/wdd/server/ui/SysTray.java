@@ -15,13 +15,14 @@ import java.awt.image.BufferedImage;
 import java.net.SocketAddress;
 
 import freakrware.wdd.server.core.ThreadPooledServer;
+import freakrware.wdd.server.resources.WDD_interface;
 
 
 
-public class SysTray {
+public class SysTray implements WDD_interface{
 
 	TrayIcon trayIcon = null;
-	final static Image IMAGE_START = set_image("A");//Toolkit.getDefaultToolkit().getImage(Server_Main.class.getResource("/S.png"));
+	final static Image IMAGE_START = set_image("A");
 	ThreadPooledServer server;
 	public SocketAddress clientip;
 	
@@ -45,7 +46,7 @@ public class SysTray {
             public void actionPerformed(ActionEvent e) {
         		
         		if (server.isStopped()){
-        			server = new ThreadPooledServer(15000);
+        			server = new ThreadPooledServer(PORT);
         			System.out.println("Starting Server");
         			server.tray = SysTray.this;
         			update("A");
@@ -76,11 +77,11 @@ public class SysTray {
         sstartItem.setLabel("Server-(Re)-Start");
         MenuItem endItem = new MenuItem();
         endItem.addActionListener(beenden);
-        endItem.setLabel("Streams_Server Beenden");
+        endItem.setLabel("WDD_Server Beenden");
         popup.add(sstopItem);
         popup.add(sstartItem);
         popup.add(endItem);
-        trayIcon = new TrayIcon(IMAGE_START, "Streams_Server", popup);
+        trayIcon = new TrayIcon(IMAGE_START, "WDD_Server", popup);
         trayIcon.addActionListener(beenden);
         try {
             tray.add(trayIcon);
@@ -90,30 +91,7 @@ public class SysTray {
     } else {
     }
  }
-	public void update(int umkehrer){
-		if (trayIcon != null) {
-			
-			BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);  
-			Graphics2D g2d = image.createGraphics();
-			Font font = g2d.getFont();  
-			font = font.deriveFont(Font.BOLD,18.0f); // or any other size  
-			g2d.setFont(font);
-			g2d.setColor(Color.GREEN);
-			if(umkehrer == 7 || umkehrer == 8){
-				g2d.setColor(Color.YELLOW);
-			}
-			if(umkehrer == 9 || umkehrer == 10){
-				g2d.setColor(Color.RED);
-			}
-			g2d.drawString(String.valueOf(umkehrer),3, 15);
-			g2d.dispose(); 
-			trayIcon.setImageAutoSize(true);
-			trayIcon.setImage(image);
-		}
-	}
 	
-	
-
 	public void update(String status){
 		if (trayIcon != null) {
 			
@@ -121,10 +99,10 @@ public class SysTray {
 			trayIcon.setImageAutoSize(true);
 			trayIcon.setImage(image);
 			if (status.equals("C")){
-				trayIcon.setToolTip("Streams_Server : linked to IP = "+String.valueOf(clientip));
+				trayIcon.setToolTip("WDD_Server : linked to IP = "+String.valueOf(clientip));
 			}else
 			{
-			trayIcon.setToolTip("Streams_Server");
+			trayIcon.setToolTip("WDD_Server");
 			}
 		}
 	}

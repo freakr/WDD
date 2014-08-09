@@ -7,10 +7,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import freakrware.wdd.server.resources.Setup_Server_PC;
-import freakrware.wdd.server.resources.Streams_lib;
+import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
 
-public class ThreadPooledServer implements Runnable,Streams_lib{
+public class ThreadPooledServer implements Runnable,WDD_interface{
 
     protected int          serverPort   = 9000;
     protected ServerSocket serverSocket = null;

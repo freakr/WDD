@@ -11,7 +11,7 @@ import java.sql.Statement;
 import android.os.Environment;
 
 
-public class DataBase implements Streams_lib{
+public class DataBase implements WDD_interface{
 
 	private static Connection dbVerbindung = null;
 	private static Statement stmt = null;
@@ -145,6 +145,9 @@ public class DataBase implements Streams_lib{
 	    Runtime.getRuntime().addShutdownHook(new Thread() {
 	        public void run() {
 	            try {
+	            	if (!rs.isClosed()){
+	            		rs.close();
+	            	}
 	                if (!dbVerbindung.isClosed()) {
 	                	dbVerbindung.close();
 	                }

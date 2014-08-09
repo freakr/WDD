@@ -13,10 +13,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import freakrware.wdd.server.resources.Setup_Server_PC;
-import freakrware.wdd.server.resources.Streams_lib;
+import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
 
-public class WorkerRunnable implements Runnable,Streams_lib{
+public class WorkerRunnable implements Runnable,WDD_interface{
 
     protected Socket clientSocket = null;
     private SysTray tray;

@@ -13,7 +13,7 @@ import android.os.Environment;
 
 
 
-public class Datenbank implements Streams_lib{
+public class Datenbank implements WDD_interface{
 	
 	{
         try {
