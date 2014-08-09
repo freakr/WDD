@@ -46,26 +46,29 @@ public class SFCP_Server implements WDD_interface{
     	case CONNECTION_REQUEST:
     		output.println(CONNECTION_ACCEPTED);
     		break;
+    	case REQUEST_ADD_USER:
+    		output.println(REQUEST_ADD_USER);
+    		line = input.readLine();
+			while(DB.user_exists(line)){
+				System.out.println(USER_EXISTS);
+				output.println(USER_EXISTS);
+				break;
+			}
+			System.out.println(line + " added");
+			output.println(USER_ADDED);
+			break;
     	case OPEN_LINK:
     		output.println(REQUEST_URL);
-    		try {
-				line = input.readLine();
-			} catch (IOException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-    		URI uri = null;
+    		line = input.readLine();
+			URI uri = null;
 			try {
 				uri = new URI(line);
 				if (Desktop.isDesktopSupported()) {
-        		      try {
-        		        Desktop.getDesktop().browse(uri);
-        		      } catch (IOException e) { 
-        		    	  System.out.println(e.getMessage());
-        		    	  }
-        		    } else { 
-        		    	System.out.println("Kein Desktop gefunden !");
-        		    	}
+        		     Desktop.getDesktop().browse(uri);
+				}
+        		else { 
+        		    System.out.println("Kein Desktop gefunden !");
+        		}
 			} catch (URISyntaxException e1) {
 				// TODO Auto-generated catch block
 				System.out.println(e1.getMessage());

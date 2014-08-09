@@ -6,6 +6,12 @@ import freakrware.wdd.server.resources.WDD_interface;
 public class Client_Main implements WDD_interface{
 	
 	public static void main(String[] args) {
+		Server_Setup setup = new Server_Setup();
+		//connection_keep();
+		new Thread(new Client(setup,LOCALHOST,REQUEST_ADD_USER, "FreakR")).start();
+	}
+	@SuppressWarnings("unused")
+	private static void connection_keep(){
 		Thread Online_Thread = new Thread (new Runnable() {
 			public void run() {
 				Thread t1 = Thread.currentThread();

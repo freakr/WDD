@@ -54,6 +54,9 @@ public class SFCP_Client implements WDD_interface {
 		case REQUEST_URL:
 			output.println(value);
 			break;
+		case REQUEST_ADD_USER:
+    		output.println(value);
+    		break;
 		case CONNECTION_ACCEPTED:
 			output.println(command);
 			break;
