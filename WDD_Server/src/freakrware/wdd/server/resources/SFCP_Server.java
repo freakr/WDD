@@ -1,4 +1,4 @@
-package freakrware.wdd.server.core;
+package freakrware.wdd.server.resources;
 
 import java.awt.Desktop;
 import java.io.BufferedReader;
@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import freakrware.wdd.server.resources.DataBase;
-import freakrware.wdd.server.resources.WDD_interface;
 
 /**
  * String formatted Connection Protokoll

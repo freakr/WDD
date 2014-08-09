@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import freakrware.wdd.server.resources.DataBase;
+import freakrware.wdd.server.resources.SFCP_Server;
 import freakrware.wdd.server.resources.Server_Setup;
 import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
