@@ -120,7 +120,7 @@ public class DataBase implements WDD_interface{
 			 extStorageDirectory = Environment.getExternalStorageDirectory().toString();
 		 }
 		 catch(Exception e){
-			 e.printStackTrace();
+			 //e.printStackTrace();
 		 }
 	     
 	     File myNewFolder = new File(extStorageDirectory + newFolder);
@@ -149,7 +149,7 @@ public class DataBase implements WDD_interface{
 	    Runtime.getRuntime().addShutdownHook(new Thread() {
 	        public void run() {
 	            try {
-	            	if (!rs.isClosed()){
+	            	if (rs != null && !rs.isClosed()){
 	            		rs.close();
 	            	}
 	                if (!dbVerbindung.isClosed()) {

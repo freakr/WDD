@@ -13,6 +13,6 @@ public class ServerMain implements WDD_interface{
 		server.tray = st;
 		st.start();
 		new Thread(server).start();
-}
+	}
 
 }
