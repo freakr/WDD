@@ -46,7 +46,7 @@ public class WorkerRunnable implements Runnable,WDD_interface{
             	if (serverstatus.equals(SERVERSTATUS_OFF)){
             		line = CONNECTION_CLOSE;
             	}
-            	new SFCP_Server(line,input,output);
+            	new SFCP_Server(line,input,output,DB);
             	
             }  
         } catch (IOException e) {

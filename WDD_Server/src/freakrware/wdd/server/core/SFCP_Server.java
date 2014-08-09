@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import freakrware.wdd.server.resources.DataBase;
 import freakrware.wdd.server.resources.WDD_interface;
 
 /**
@@ -18,15 +19,17 @@ public class SFCP_Server implements WDD_interface{
 	private String line;
 	private BufferedReader input;
 	private PrintWriter output;
+	private DataBase DB;
 
-	public SFCP_Server(String line, BufferedReader input, PrintWriter output) {
+	public SFCP_Server(String line, BufferedReader input, PrintWriter output, DataBase DB) throws IOException {
 		this.line = line;
 		this.input = input;
 		this.output = output;
+		this.DB = DB;
 		work();
 	}
 
-	private void work() {
+	private void work() throws IOException {
 		switch(line){
     	case CONNECTION_KEEP:
     		try {
@@ -40,12 +43,8 @@ public class SFCP_Server implements WDD_interface{
     	case CONNECTION_CLOSE:
     		output.println(CONNECTION_CLOSE);
     		output.close();
-    		try {
-				input.close();
-			} catch (IOException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
+    		input.close();
+			
     		break;
     	case CONNECTION_REQUEST:
     		output.println(CONNECTION_ACCEPTED);
@@ -77,15 +76,10 @@ public class SFCP_Server implements WDD_interface{
 			output.println(ACTION_COMPLETE);
     		break;
     	default :
-    		output.close();
-    		try {
-				input.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
     		output.println(CONNECTION_CLOSE);
-        	break;
+    		output.close();
+    		input.close();
+			break;
     	}
 		
 	}
