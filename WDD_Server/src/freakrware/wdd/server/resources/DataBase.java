@@ -28,7 +28,7 @@ public class DataBase implements WDD_interface{
 	}
 	public DataBase(){
 		
-		initialisiern_datenbank();
+		initialise_database();
 		
 	}
 	public boolean user_exists(String name){
@@ -43,8 +43,15 @@ public class DataBase implements WDD_interface{
 		}
 	}
 	
-	public void add_data(){
-		execute_update();
+	public boolean user_add(String name){
+		set_strsql("INSERT INTO "+DB_TABLE_USERNAME+" ("+DB_COL_USERNAME+") VALUES ('"+ name +"')"); 
+				
+		return set_data();
+		
+	}
+	
+	public boolean set_data(){
+		return execute_update();
 	}
 	@SuppressWarnings("null")
 	public String[] get_data(String[] getter){
@@ -67,11 +74,13 @@ public class DataBase implements WDD_interface{
 		return result;
 		
 	}
-	private void execute_update(){
+	private boolean execute_update(){
 		try {
 			stmt.executeUpdate(strsql);
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}
@@ -132,7 +141,7 @@ public class DataBase implements WDD_interface{
 		}
 	
 	}
-	protected void initialisiern_datenbank() {
+	protected void initialise_database() {
 		 String newFolder = "/"+DB_FOLDER;
 		 String extStorageDirectory = "";
 		 try{

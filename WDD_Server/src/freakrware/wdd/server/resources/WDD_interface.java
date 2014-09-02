@@ -17,7 +17,8 @@ public interface WDD_interface {
 	static final String REQUEST_ADD_USER = "Request_Add_User";
 	static final String OPEN_LINK = "Open_Link";
 	static final String USER_EXISTS = "User_Exists";
-	static final String USER_ADDED = "User_Added";
+	static final String USER_ADDED = "User_added";
+	static final String USER_NOT_ADDED = "User_not_added";
 	// Socket Connection
 	static final String LOCALHOST = "localhost";
 	static final String HOST = "freakr.spdns.de";
