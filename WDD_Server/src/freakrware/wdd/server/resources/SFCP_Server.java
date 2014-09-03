@@ -69,28 +69,31 @@ public class SFCP_Server implements WDD_interface{
     		}
     		if(DB.message_exists(message) == 0){
     			DB.message_add(message);
-    			DB.messageboard_add(sentfrom,sentto,DB.message_exists(message));
+    			if(DB.messageboard_add(sentfrom,sentto,DB.message_exists(message))){
+    				output.println(MESSAGE_ADDED);
+    			}else{
+    				output.println(MESSAGE_NOT_ADDED);
+    			}
     		}else
     		{
-    			DB.messageboard_add(sentfrom,sentto,DB.message_exists(message));
+    			if(DB.messageboard_add(sentfrom,sentto,DB.message_exists(message))){
+    				output.println(MESSAGE_ADDED);
+    			}else{
+    				output.println(MESSAGE_NOT_ADDED);
+    			}
     		}
-    		
-    		System.out.println(MESSAGE_ADDED);
-			break;
+    		break;
     	case REQUEST_ADD_USER:
     		output.println(REQUEST_ADD_USER);
     		line = input.readLine();
 			if(DB.user_exists(line) != 0){
-				System.out.println(USER_EXISTS);
 				output.println(USER_EXISTS);
 			}
 			else{
 				if(DB.user_add(line)){
-					System.out.println(line + " added");
 					output.println(USER_ADDED);
 				}else
 				{
-					System.out.println(line + " not added");
 					output.println(USER_NOT_ADDED);
 				}
 				
@@ -102,16 +105,13 @@ public class SFCP_Server implements WDD_interface{
 			if(DB.user_exists(line) != 0){
 				System.out.println(USER_EXISTS);
 				if(DB.user_remove(line)){
-					System.out.println(line + " removed");
 					output.println(USER_REMOVED);
 				}else
 				{
-					System.out.println(line + " not removed");
 					output.println(USER_NOT_REMOVED);
 				}
 			}
 			else{
-				System.out.println(USER_NOT_EXISTS);
 				output.println(USER_NOT_EXISTS);
 			}
 			break;	
