@@ -26,7 +26,7 @@ public class SFCP_Client implements WDD_interface {
 		work();
 	}
 
-	private void work() throws IOException {
+	private String work() throws IOException {
 		switch (line) {
 		case CONNECTION_KEEP:
 			try {
@@ -57,6 +57,9 @@ public class SFCP_Client implements WDD_interface {
 		case REQUEST_ADD_USER:
     		output.println(value);
     		break;
+		case REQUEST_REMOVE_USER:
+    		output.println(value);
+    		break;
 		case CONNECTION_ACCEPTED:
 			output.println(command);
 			break;
@@ -65,7 +68,8 @@ public class SFCP_Client implements WDD_interface {
 			break;
 		default:
 			output.println(CONNECTION_CLOSE);
-			break;
+			return line;
 		}
+		return line;
 	}
 }

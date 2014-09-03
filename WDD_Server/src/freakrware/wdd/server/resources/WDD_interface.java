@@ -14,11 +14,15 @@ public interface WDD_interface {
 	static final String FILE_COMPLETE = "File_Complete";
 	static final String REQUEST_DB_FILES = "Request_DB_Files";
 	static final String REQUEST_URL = "Request_Url";
-	static final String REQUEST_ADD_USER = "Request_Add_User";
+	static final String REQUEST_ADD_USER = "Request_add_User";
+	static final String REQUEST_REMOVE_USER = "Request_remove_User";
 	static final String OPEN_LINK = "Open_Link";
-	static final String USER_EXISTS = "User_Exists";
+	static final String USER_EXISTS = "User_exists";
+	static final String USER_NOT_EXISTS = "User_not_exists";
 	static final String USER_ADDED = "User_added";
 	static final String USER_NOT_ADDED = "User_not_added";
+	static final String USER_REMOVED = "User_removed";
+	static final String USER_NOT_REMOVED = "User_not_removed";
 	// Socket Connection
 	static final String LOCALHOST = "localhost";
 	static final String HOST = "freakr.spdns.de";

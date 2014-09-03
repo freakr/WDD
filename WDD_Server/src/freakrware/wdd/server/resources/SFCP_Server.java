@@ -64,10 +64,26 @@ public class SFCP_Server implements WDD_interface{
 				}
 				
 			}
-				
-			
-			
 			break;
+    	case REQUEST_REMOVE_USER:
+    		output.println(REQUEST_REMOVE_USER);
+    		line = input.readLine();
+			if(DB.user_exists(line)){
+				System.out.println(USER_EXISTS);
+				if(DB.user_remove(line)){
+					System.out.println(line + " removed");
+					output.println(USER_REMOVED);
+				}else
+				{
+					System.out.println(line + " not removed");
+					output.println(USER_NOT_REMOVED);
+				}
+			}
+			else{
+				System.out.println(USER_NOT_EXISTS);
+				output.println(USER_NOT_EXISTS);
+			}
+			break;	
     	case OPEN_LINK:
     		output.println(REQUEST_URL);
     		line = input.readLine();

@@ -50,6 +50,12 @@ public class DataBase implements WDD_interface{
 		return set_data();
 		
 	}
+	public boolean user_remove(String name){
+		set_strsql("DELETE FROM "+DB_TABLE_USERNAME+" WHERE ("+DB_COL_USERNAME+") = ('"+ name +"')"); 
+				
+		return set_data();
+		
+	}
 	
 	public boolean set_data(){
 		return execute_update();
