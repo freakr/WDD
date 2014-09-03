@@ -11,16 +11,16 @@ public class SFCP_Client implements WDD_interface {
 	private BufferedReader input;
 	private PrintWriter output;
 	private Server_Setup setup;
-	private String value;
+	private String[] arguments;
 	private Socket server;
 	private String command;
 
-	public SFCP_Client(String line, BufferedReader input, PrintWriter output, Server_Setup setup, String value, Socket server, String command) throws IOException {
+	public SFCP_Client(String line, BufferedReader input, PrintWriter output, Server_Setup setup, String[] arguments, Socket server, String command) throws IOException {
 		this.line = line;
 		this.input = input;
 		this.output = output;
 		this.setup = setup;
-		this.value = value;
+		this.arguments = arguments;
 		this.server = server;
 		this.command = command;
 		work();
@@ -52,13 +52,24 @@ public class SFCP_Client implements WDD_interface {
 			}
 			break;
 		case REQUEST_URL:
-			output.println(value);
-			break;
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
+    		break;
+		case REQUEST_ADD_MESSAGE:
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
+    		break;
 		case REQUEST_ADD_USER:
-    		output.println(value);
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
     		break;
 		case REQUEST_REMOVE_USER:
-    		output.println(value);
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
     		break;
 		case CONNECTION_ACCEPTED:
 			output.println(command);

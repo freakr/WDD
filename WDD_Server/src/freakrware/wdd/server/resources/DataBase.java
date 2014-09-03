@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 import android.os.Environment;
 
@@ -31,19 +33,43 @@ public class DataBase implements WDD_interface{
 		initialise_database();
 		
 	}
-	public boolean user_exists(String name){
+	public int user_exists(String name){
 		set_strsql("SELECT "+DB_COL_USERID+" FROM "+DB_TABLE_USERNAME+" WHERE "+DB_COL_USERNAME+" = '"+ name +"'");
 		
 		String[] result = get_data(GETTER_USER_EXISTS);
-		 for(int i=0; i< result.length;i++){
+		for(int i=0; i< result.length;i++){
 			 if(result[i] != null){
-			 return true;
+			 return Integer.parseInt(result[i]);
+			 	}
 			 }
-			 }
-			 return false;
+		return 0;
 		
 	}
-	
+	public boolean messageboard_add(int sentfrom, int sentto,int message) {
+		Timestamp time = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+		set_strsql("INSERT INTO "+DB_TABLE_MESSAGEBOARD+" ("+DB_COL_SENTFROMUSERID+","+DB_COL_SENTTOUSERID+","+DB_COL_MESSAGEID+","+DB_COL_INCOMINGDATE+") VALUES ('"+ sentfrom +"','"+ sentto +"','"+ message +"','"+ time +"')"); 
+		
+		return set_data();
+	}
+	public int message_exists(String message){
+		set_strsql("SELECT "+DB_COL_MESSAGEID+" FROM "+DB_TABLE_MESSAGES+" WHERE "+DB_COL_MESSAGETEXT+" = '"+ message +"'");
+		
+		String[] result = get_data(GETTER_MESSAGE_EXISTS);
+		for(int i=0; i< result.length;i++){
+			 if(result[i] != null){
+			 return Integer.parseInt(result[i]);
+			 	}
+			 }
+		return 0;
+		
+	}
+	public boolean message_add(String message) {
+		// TODO Auto-generated method stub
+		set_strsql("INSERT INTO "+DB_TABLE_MESSAGES+" ("+DB_COL_MESSAGETEXT+") VALUES ('"+ message +"')"); 
+		
+		return set_data();
+	}
+
 	public boolean user_add(String name){
 		set_strsql("INSERT INTO "+DB_TABLE_USERNAME+" ("+DB_COL_USERNAME+") VALUES ('"+ name +"')"); 
 				
@@ -196,5 +222,6 @@ public class DataBase implements WDD_interface{
 	        }
 	    });
 	}
-
+	
+	
 }

@@ -17,15 +17,15 @@ public class Client implements Runnable, WDD_interface {
 	public String command;
 	private String host;
 	private int port;
-	private String value;
+	private String[] arguments;
 	private Server_Setup setup;
 
-	public Client(Server_Setup setup, String host, String command,String value) {
+	public Client(Server_Setup setup, String host, String command,String[] arguments) {
 		this.setup = setup;
 		this.host = host; // "192.168.42.174";
 		this.port = PORT;
 		this.command = command;
-		this.value = value;
+		this.arguments = arguments;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class Client implements Runnable, WDD_interface {
 			String line;
 			while ((line = input.readLine()) != null) {
 				System.out.println(line);
-				new SFCP_Client(line,input,output,setup,value,server,command);
+				new SFCP_Client(line,input,output,setup,arguments,server,command);
 				}
 		} catch (IOException e) {
 			if (command.equals(CONNECTION_KEEP)) {
