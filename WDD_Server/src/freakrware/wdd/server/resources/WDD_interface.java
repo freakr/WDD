@@ -18,6 +18,7 @@ public interface WDD_interface {
 	static final String REQUEST_REMOVE_USER = "Request_remove_User";
 	static final String REQUEST_ADD_MESSAGE = "Request_add_Message";
 	static final String MESSAGE_ADDED = "Message_added";
+	static final String MESSAGE_NOT_ADDED = "Message_not_added";
 	static final String OPEN_LINK = "Open_Link";
 	static final String SENDER_UNKNOWN = "Sender_Unknown";
 	static final String RECEIVER_UNKNOWN = "Receiver_Unknown";
