@@ -49,19 +49,22 @@ public class SFCP_Server implements WDD_interface{
     	case REQUEST_ADD_USER:
     		output.println(REQUEST_ADD_USER);
     		line = input.readLine();
-			while(DB.user_exists(line)){
+			if(DB.user_exists(line)){
 				System.out.println(USER_EXISTS);
 				output.println(USER_EXISTS);
-				break;
 			}
-			if(DB.user_add(line)){
-				System.out.println(line + " added");
-				output.println(USER_ADDED);
-			}else
+			else{
+				if(DB.user_add(line)){
+					System.out.println(line + " added");
+					output.println(USER_ADDED);
+				}else
 				{
-				System.out.println(line + " not added");
-				output.println(USER_NOT_ADDED);
+					System.out.println(line + " not added");
+					output.println(USER_NOT_ADDED);
 				}
+				
+			}
+				
 			
 			
 			break;

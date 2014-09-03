@@ -35,12 +35,13 @@ public class DataBase implements WDD_interface{
 		set_strsql("SELECT "+DB_COL_USERID+" FROM "+DB_TABLE_USERNAME+" WHERE "+DB_COL_USERNAME+" = '"+ name +"'");
 		
 		String[] result = get_data(GETTER_USER_EXISTS);
-		if(result != null){
-			return true;
-		}
-		else{
-			return false;
-		}
+		 for(int i=0; i< result.length;i++){
+			 if(result[i] != null){
+			 return true;
+			 }
+			 }
+			 return false;
+		
 	}
 	
 	public boolean user_add(String name){
@@ -55,14 +56,14 @@ public class DataBase implements WDD_interface{
 	}
 	@SuppressWarnings("null")
 	public String[] get_data(String[] getter){
-		String[] result = null;
+		String[] result = new String[getter.length];
 		execute_query();
 		int x = 0;
 		try {
 			while(rs.next())
 			{
 				for(int y = 0;y < getter.length;y++){
-					result[x]= rs.getString(getter[y]);
+					result[x] = rs.getString(getter[y]);
 				x++;
 				}
 				
