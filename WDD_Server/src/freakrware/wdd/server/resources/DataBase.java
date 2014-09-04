@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.os.Environment;
@@ -44,6 +45,19 @@ public class DataBase implements WDD_interface{
 			 }
 		return 0;
 		
+	}
+	@SuppressWarnings("null")
+	public String[] get_new_messages(int user) {
+		set_strsql("SELECT "+DB_COL_MESSAGEID+" FROM "+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_SENTTOUSERID+" = '"+ user +"'");
+		String[] resultids = get_data(GETTER_NEW_MESSAGES_EXISTS);
+		String[] result = new String[resultids.length];
+		for(int x=0;x<resultids.length;x++){
+			set_strsql("SELECT "+DB_COL_MESSAGETEXT+" FROM "+DB_TABLE_MESSAGES+" WHERE "+DB_COL_MESSAGEID+" = '"+ resultids[x] +"'");
+			String [] resultone = get_data(GETTER_NEW_MESSAGE);
+			result[x] = resultone[0];
+		}
+		
+		return result;
 	}
 	public boolean messageboard_add(int sentfrom, int sentto,int message) {
 		Timestamp time = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
@@ -88,15 +102,13 @@ public class DataBase implements WDD_interface{
 	}
 	@SuppressWarnings("null")
 	public String[] get_data(String[] getter){
-		String[] result = new String[getter.length];
+		ArrayList<String> result = new ArrayList<String>();
 		execute_query();
-		int x = 0;
 		try {
 			while(rs.next())
 			{
 				for(int y = 0;y < getter.length;y++){
-					result[x] = rs.getString(getter[y]);
-				x++;
+					result.add(rs.getString(getter[y]));
 				}
 				
 			}
@@ -104,7 +116,11 @@ public class DataBase implements WDD_interface{
 			e.printStackTrace();
 		}
 		close_result_set();
-		return result;
+		String[] resultarray = new String[result.size()];
+		for(int x = 0; x < result.size();x++){
+			resultarray[x] = result.get(x);
+		}
+		return resultarray;
 		
 	}
 	private boolean execute_update(){
@@ -222,6 +238,7 @@ public class DataBase implements WDD_interface{
 	        }
 	    });
 	}
+	
 	
 	
 }

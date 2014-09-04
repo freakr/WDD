@@ -32,7 +32,6 @@ public class SFCP_Server implements WDD_interface{
     		try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e2) {
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
     		output.println(CONNECTION_KEEP);
@@ -83,6 +82,36 @@ public class SFCP_Server implements WDD_interface{
     			}
     		}
     		break;
+    	case REQUEST_NEW_MESSAGES_FROM_BOARD:
+    		output.println(REQUEST_NEW_MESSAGES_FROM_BOARD);
+    		line = input.readLine();
+			if(DB.user_exists(line) != 0){
+				String[] messagefromboard = DB.get_new_messages(DB.user_exists(line));
+				if(messagefromboard.length > 0 ){
+					
+					output.println(messagefromboard.length);
+					for(int x=0;x<messagefromboard.length;x++){
+						output.println(messagefromboard[x]);
+					}
+				}else
+				{
+					output.println(NO_NEW_MESSAGES_FROM_BOARD);
+				}
+			}
+			else{
+				output.println(USER_NOT_EXISTS);
+				}
+			line = input.readLine();
+			if (line.equals(ALL_MESSAGES_RECEIVED)){
+				output.println(ACTION_COMPLETE);
+				//TODO Nachrichten löschen
+				
+			}
+			else
+			{
+				output.println(MESSAGE_RECEIVE_ERROR);
+			}
+			break;
     	case REQUEST_ADD_USER:
     		output.println(REQUEST_ADD_USER);
     		line = input.readLine();
@@ -128,7 +157,6 @@ public class SFCP_Server implements WDD_interface{
         		    System.out.println("Kein Desktop gefunden !");
         		}
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
 				System.out.println(e1.getMessage());
 			}
 			output.println(ACTION_COMPLETE);

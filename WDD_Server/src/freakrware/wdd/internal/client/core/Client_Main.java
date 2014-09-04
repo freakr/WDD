@@ -8,7 +8,8 @@ public class Client_Main implements WDD_interface{
 	public static void main(String[] args) {
 		Server_Setup setup = new Server_Setup();
 		//connection_keep();
-		new Thread(new Client(setup,LOCALHOST,REQUEST_ADD_MESSAGE, new String[] {"FreakR1","FreakR","Hello BadAss"})).start();
+		//new Thread(new Client(setup,LOCALHOST,REQUEST_ADD_MESSAGE, new String[] {"FreakR1","FreakR","TEST 3"})).start();
+		new Thread(new Client(setup,LOCALHOST,REQUEST_NEW_MESSAGES_FROM_BOARD, new String[] {"FreakR"})).start();
 		//new Thread(new Client(setup,LOCALHOST,REQUEST_ADD_USER, new String[] {"FreakR1"})).start();
 	}
 	@SuppressWarnings("unused")

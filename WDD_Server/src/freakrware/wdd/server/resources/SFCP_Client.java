@@ -26,6 +26,7 @@ public class SFCP_Client implements WDD_interface {
 		work();
 	}
 
+	@SuppressWarnings("null")
 	private String work() throws IOException {
 		switch (line) {
 		case CONNECTION_KEEP:
@@ -56,6 +57,24 @@ public class SFCP_Client implements WDD_interface {
 				output.println(arguments[x]);
 			}
     		break;
+		case REQUEST_NEW_MESSAGES_FROM_BOARD:
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
+			line = input.readLine();
+			if(line.equals(NO_NEW_MESSAGES_FROM_BOARD)){
+				output.println(CONNECTION_CLOSE);
+				break;
+			}
+			else{
+				String[] messages = new String[Integer.parseInt(line)];
+				for(int x=0;x< Integer.parseInt(line);x++){
+					messages[x]=input.readLine();
+					System.out.println(messages[x]);
+				}
+				output.println(ALL_MESSAGES_RECEIVED);
+			}
+			break;
 		case REQUEST_ADD_MESSAGE:
 			for(int x=0;x < arguments.length;x++){
 				output.println(arguments[x]);

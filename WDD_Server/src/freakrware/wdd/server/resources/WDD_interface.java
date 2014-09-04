@@ -17,8 +17,12 @@ public interface WDD_interface {
 	static final String REQUEST_ADD_USER = "Request_add_User";
 	static final String REQUEST_REMOVE_USER = "Request_remove_User";
 	static final String REQUEST_ADD_MESSAGE = "Request_add_Message";
+	static final String REQUEST_NEW_MESSAGES_FROM_BOARD = "Request_new_Messages_from_Board";
+	static final String NO_NEW_MESSAGES_FROM_BOARD = "No_new_Messages_from_Board";
 	static final String MESSAGE_ADDED = "Message_added";
 	static final String MESSAGE_NOT_ADDED = "Message_not_added";
+	static final String ALL_MESSAGES_RECEIVED = "All_Messages_received";
+	static final String MESSAGE_RECEIVE_ERROR = "Messages_Receive_Error";
 	static final String OPEN_LINK = "Open_Link";
 	static final String SENDER_UNKNOWN = "Sender_Unknown";
 	static final String RECEIVER_UNKNOWN = "Receiver_Unknown";
@@ -56,6 +60,8 @@ public interface WDD_interface {
 	// DataBase Getter
 	final static String[] GETTER_USER_EXISTS = {DB_COL_USERID};
 	final static String[] GETTER_MESSAGE_EXISTS = {DB_COL_MESSAGEID};
+	final static String[] GETTER_NEW_MESSAGE = {DB_COL_MESSAGETEXT};
+	final static String[] GETTER_NEW_MESSAGES_EXISTS = {DB_COL_MESSAGEID};
 	// Others
 	final static String SETUP = "Setup";
 	// Client Parameter
