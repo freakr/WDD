@@ -86,12 +86,14 @@ public class SFCP_Server implements WDD_interface{
     		output.println(REQUEST_NEW_MESSAGES_FROM_BOARD);
     		line = input.readLine();
 			if(DB.user_exists(line) != 0){
-				String[] messagefromboard = DB.get_new_messages(DB.user_exists(line));
+				String[][] messagefromboard = DB.get_new_messages(DB.user_exists(line));
 				if(messagefromboard.length > 0 ){
 					
-					output.println(messagefromboard.length);
+					output.println(messagefromboard.length*(messagefromboard[0].length-1));
 					for(int x=0;x<messagefromboard.length;x++){
-						output.println(messagefromboard[x]);
+						output.println(messagefromboard[x][0]);
+						output.println(messagefromboard[x][1]);
+						output.println(messagefromboard[x][2]);
 					}
 				}else
 				{

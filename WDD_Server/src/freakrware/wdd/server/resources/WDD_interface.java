@@ -59,9 +59,12 @@ public interface WDD_interface {
 	final static String DB_COL_INCOMINGDATE = "IncomingDate";
 	// DataBase Getter
 	final static String[] GETTER_USER_EXISTS = {DB_COL_USERID};
+	final static String[] GETTER_USER_NAME = {DB_COL_USERNAME};
 	final static String[] GETTER_MESSAGE_EXISTS = {DB_COL_MESSAGEID};
-	final static String[] GETTER_NEW_MESSAGE = {DB_COL_MESSAGETEXT};
-	final static String[] GETTER_NEW_MESSAGES_EXISTS = {DB_COL_MESSAGEID};
+	final static String[] GETTER_MESSAGE = {DB_COL_MESSAGETEXT};
+	final static String[] GETTER_TIME = {DB_COL_INCOMINGDATE};
+	final static String[] GETTER_NEW_MESSAGE = {DB_COL_SENTFROMUSERID,DB_COL_MESSAGEID,DB_COL_INCOMINGDATE};
+	final static String[] GETTER_NEW_MESSAGES_EXISTS = {DB_COL_ACTIONID};
 	// Others
 	final static String SETUP = "Setup";
 	// Client Parameter

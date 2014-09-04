@@ -47,14 +47,21 @@ public class DataBase implements WDD_interface{
 		
 	}
 	@SuppressWarnings("null")
-	public String[] get_new_messages(int user) {
-		set_strsql("SELECT "+DB_COL_MESSAGEID+" FROM "+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_SENTTOUSERID+" = '"+ user +"'");
+	public String[][] get_new_messages(int user) {
+		set_strsql("SELECT "+DB_COL_ACTIONID+" FROM "+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_SENTTOUSERID+" = '"+ user +"'");
 		String[] resultids = get_data(GETTER_NEW_MESSAGES_EXISTS);
-		String[] result = new String[resultids.length];
+		String[][] result = new String[resultids.length][GETTER_NEW_MESSAGE.length+1];
 		for(int x=0;x<resultids.length;x++){
-			set_strsql("SELECT "+DB_COL_MESSAGETEXT+" FROM "+DB_TABLE_MESSAGES+" WHERE "+DB_COL_MESSAGEID+" = '"+ resultids[x] +"'");
-			String [] resultone = get_data(GETTER_NEW_MESSAGE);
-			result[x] = resultone[0];
+			result[x][3] = resultids[x];
+			set_strsql("SELECT DISTINCT "+DB_COL_USERNAME+" FROM "+DB_TABLE_USERNAME+","+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_SENTFROMUSERID+" = "+DB_COL_USERID+" AND "+DB_COL_ACTIONID+" = '"+resultids[x]+"'");
+			String [] resultone = get_data(GETTER_USER_NAME);
+			result[x][0] = resultone[0];
+			set_strsql("SELECT DISTINCT "+DB_COL_MESSAGETEXT+" FROM "+DB_TABLE_MESSAGES+","+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_ACTIONID+" = '"+ resultids[x] +"' AND "+DB_TABLE_MESSAGEBOARD+"."+DB_COL_MESSAGEID+" = "+DB_TABLE_MESSAGES+"."+DB_COL_MESSAGEID);
+			String [] resulttwo = get_data(GETTER_MESSAGE);
+			result[x][1] = resulttwo[0];
+			set_strsql("SELECT DISTINCT "+DB_COL_INCOMINGDATE+" FROM "+DB_TABLE_MESSAGES+","+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_ACTIONID+" = '"+ resultids[x] +"'");
+			String [] resultthree = get_data(GETTER_TIME);
+			result[x][2] = resultthree[0];
 		}
 		
 		return result;

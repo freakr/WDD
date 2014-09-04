@@ -67,10 +67,14 @@ public class SFCP_Client implements WDD_interface {
 				break;
 			}
 			else{
-				String[] messages = new String[Integer.parseInt(line)];
-				for(int x=0;x< Integer.parseInt(line);x++){
-					messages[x]=input.readLine();
-					System.out.println(messages[x]);
+				String[][] messages = new String[Integer.parseInt(line)/3][3];
+				for(int x=0;x< (Integer.parseInt(line)/3);x++){
+					messages[x][0] = input.readLine();
+					System.out.println(messages[x][0]);
+					messages[x][1] = input.readLine();
+					System.out.println(messages[x][1]);
+					messages[x][2] = input.readLine();
+					System.out.println(messages[x][2]);
 				}
 				output.println(ALL_MESSAGES_RECEIVED);
 			}
