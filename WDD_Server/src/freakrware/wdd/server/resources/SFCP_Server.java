@@ -95,7 +95,20 @@ public class SFCP_Server implements WDD_interface{
 						output.println(messagefromboard[x][1]);
 						output.println(messagefromboard[x][2]);
 					}
-				}else
+						line = input.readLine();
+						if (line.equals(ALL_MESSAGES_RECEIVED)){
+							output.println(ACTION_COMPLETE);
+							for(int y=0;y<messagefromboard.length;y++){
+								DB.messages_senttrue(messagefromboard[y][3]);
+							}
+							
+						}
+						else
+						{
+							output.println(MESSAGE_RECEIVE_ERROR);
+						}
+					}
+				else
 				{
 					output.println(NO_NEW_MESSAGES_FROM_BOARD);
 				}
@@ -103,16 +116,7 @@ public class SFCP_Server implements WDD_interface{
 			else{
 				output.println(USER_NOT_EXISTS);
 				}
-			line = input.readLine();
-			if (line.equals(ALL_MESSAGES_RECEIVED)){
-				output.println(ACTION_COMPLETE);
-				//TODO Nachrichten löschen
-				
-			}
-			else
-			{
-				output.println(MESSAGE_RECEIVE_ERROR);
-			}
+			
 			break;
     	case REQUEST_ADD_USER:
     		output.println(REQUEST_ADD_USER);

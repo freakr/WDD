@@ -62,6 +62,7 @@ public class SFCP_Client implements WDD_interface {
 				output.println(arguments[x]);
 			}
 			line = input.readLine();
+			System.out.println(line);
 			if(line.equals(NO_NEW_MESSAGES_FROM_BOARD)){
 				output.println(CONNECTION_CLOSE);
 				break;

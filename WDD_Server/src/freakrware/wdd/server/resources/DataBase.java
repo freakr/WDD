@@ -48,7 +48,7 @@ public class DataBase implements WDD_interface{
 	}
 	@SuppressWarnings("null")
 	public String[][] get_new_messages(int user) {
-		set_strsql("SELECT "+DB_COL_ACTIONID+" FROM "+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_SENTTOUSERID+" = '"+ user +"'");
+		set_strsql("SELECT "+DB_COL_ACTIONID+" FROM "+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_SENTTOUSERID+" = '"+ user +"' AND "+DB_COL_SENTTRUE+" = FALSE");
 		String[] resultids = get_data(GETTER_NEW_MESSAGES_EXISTS);
 		String[][] result = new String[resultids.length][GETTER_NEW_MESSAGE.length+1];
 		for(int x=0;x<resultids.length;x++){
@@ -72,6 +72,12 @@ public class DataBase implements WDD_interface{
 		
 		return set_data();
 	}
+	public boolean messages_senttrue(String actionid) {
+		strsql = "UPDATE "+DB_TABLE_MESSAGEBOARD+" SET "+DB_COL_SENTTRUE+" = TRUE WHERE "+DB_COL_ACTIONID+" = " + actionid; 
+		
+		return set_data();
+	}
+	
 	public int message_exists(String message){
 		set_strsql("SELECT "+DB_COL_MESSAGEID+" FROM "+DB_TABLE_MESSAGES+" WHERE "+DB_COL_MESSAGETEXT+" = '"+ message +"'");
 		
@@ -85,7 +91,6 @@ public class DataBase implements WDD_interface{
 		
 	}
 	public boolean message_add(String message) {
-		// TODO Auto-generated method stub
 		set_strsql("INSERT INTO "+DB_TABLE_MESSAGES+" ("+DB_COL_MESSAGETEXT+") VALUES ('"+ message +"')"); 
 		
 		return set_data();
@@ -245,7 +250,7 @@ public class DataBase implements WDD_interface{
 	        }
 	    });
 	}
-	
+
 	
 	
 }
