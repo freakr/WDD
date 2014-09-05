@@ -85,6 +85,7 @@ public class SFCP_Server implements WDD_interface{
     	case REQUEST_NEW_MESSAGES_FROM_BOARD:
     		output.println(REQUEST_NEW_MESSAGES_FROM_BOARD);
     		line = input.readLine();
+    		System.out.println(line);
 			if(DB.user_exists(line) != 0){
 				String[][] messagefromboard = DB.get_new_messages(DB.user_exists(line));
 				if(messagefromboard.length > 0 ){
@@ -96,6 +97,7 @@ public class SFCP_Server implements WDD_interface{
 						output.println(messagefromboard[x][2]);
 					}
 						line = input.readLine();
+						System.out.println(line);
 						if (line.equals(ALL_MESSAGES_RECEIVED)){
 							output.println(ACTION_COMPLETE);
 							for(int y=0;y<messagefromboard.length;y++){
@@ -121,6 +123,7 @@ public class SFCP_Server implements WDD_interface{
     	case REQUEST_ADD_USER:
     		output.println(REQUEST_ADD_USER);
     		line = input.readLine();
+    		System.out.println(line);
 			if(DB.user_exists(line) != 0){
 				output.println(USER_EXISTS);
 			}
@@ -137,6 +140,7 @@ public class SFCP_Server implements WDD_interface{
     	case REQUEST_REMOVE_USER:
     		output.println(REQUEST_REMOVE_USER);
     		line = input.readLine();
+    		System.out.println(line);
 			if(DB.user_exists(line) != 0){
 				System.out.println(USER_EXISTS);
 				if(DB.user_remove(line)){
@@ -153,6 +157,7 @@ public class SFCP_Server implements WDD_interface{
     	case OPEN_LINK:
     		output.println(REQUEST_URL);
     		line = input.readLine();
+    		System.out.println(line);
 			URI uri = null;
 			try {
 				uri = new URI(line);
