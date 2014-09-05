@@ -42,14 +42,14 @@ public interface WDD_interface {
 	static final String DB_FOLDER = "WDDData/";
 	static final String DB_NAME = "DBWDD";
 	// DataBase Table-Names
-	final static String DB_TABLE_USERNAME = "Username";
-	final static String DB_TABLE_USERDATA = "Userdata";
+	final static String DB_TABLE_USER = "UserName";
 	final static String DB_TABLE_MESSAGES = "Messages";
 	final static String DB_TABLE_MESSAGEBOARD = "Messageboard";
 	// DataBase Columns
-	final static String DB_COL_USERNAME = "Username";
+	final static String DB_COL_USERNAME = "UserName";
 	final static String DB_COL_USERID = "UserID";
-	final static String DB_COL_USERIP = "UserIP";
+	final static String DB_COL_USERONLINESTATUS = "UserOnlineStatus";
+	final static String DB_COL_LASTUSERIP = "LastUserIP";
 	final static String DB_COL_MESSAGEID = "MessageID";
 	final static String DB_COL_MESSAGETEXT = "Messagetext";
 	final static String DB_COL_ACTIONID = "ActionID";
