@@ -10,11 +10,12 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Vector;
 
 import android.os.Environment;
 
 
-public class DataBase implements WDD_interface{
+public class DataBase implements DataBase_interface,WDD_interface{
 
 	private static Connection dbVerbindung = null;
 	private static Statement stmt = null;
@@ -52,7 +53,43 @@ public class DataBase implements WDD_interface{
 			return false;
 		}
 	}
-
+	@SuppressWarnings("null")
+	public Vector<String> get_messageboard() {
+		Vector result = new Vector();
+		
+		set_strsql("SELECT * FROM "+DB_TABLE_MESSAGEBOARD);
+		String[] middleresult = get_data(GETTER_MESSAGEBOARD);
+		for(int x=0;x<middleresult.length;x=x+6){
+			Vector dataindex = new Vector();
+			dataindex.add(middleresult[x]);
+			String[] username = get_username(middleresult[x+1]);
+			dataindex.add(username[0]);
+			String[] username2 = get_username(middleresult[x+2]);
+			dataindex.add(username2[0]);
+			if(middleresult[x+3].equals("1")){
+				dataindex.add(true);
+			}
+			else{
+				dataindex.add(false);
+			}
+			String[] messagetext = get_messagetext(middleresult[x+4]);
+			dataindex.add(messagetext[0]);
+			dataindex.add(middleresult[x+5]);
+			result.add(dataindex);
+		}
+		
+		return result;
+	}
+	public String[] get_username(String userid) {
+		set_strsql("SELECT "+DB_COL_USERNAME+" FROM "+DB_TABLE_USER+" WHERE "+DB_COL_USERID+" = '"+ userid +"'");
+		
+		return get_data(GETTER_USER);
+	}
+	public String[] get_messagetext(String messageid) {
+		set_strsql("SELECT "+DB_COL_MESSAGETEXT+" FROM "+DB_TABLE_MESSAGES+" WHERE "+DB_COL_MESSAGEID+" = '"+ messageid +"'");
+		
+		return get_data(GETTER_MESSAGE);
+	}
 	public String[] checkuseronline() {
 		set_strsql("SELECT "+DB_COL_USERNAME+" FROM "+DB_TABLE_USER+" WHERE "+DB_COL_USERONLINESTATUS+" = TRUE");
 		

@@ -90,13 +90,13 @@ public class SysTray implements WDD_interface{
         sstopItem.setLabel("Server-Stop");
         MenuItem openItem = new MenuItem();
         openItem.addActionListener(open);
-        openItem.setLabel("OPEN");
+        openItem.setLabel("Open");
         MenuItem sstartItem = new MenuItem();
         sstartItem.addActionListener(serverstart);
         sstartItem.setLabel("Server-(Re)-Start");
         MenuItem endItem = new MenuItem();
         endItem.addActionListener(beenden);
-        endItem.setLabel("WDD_Server Beenden");
+        endItem.setLabel("Exit");
         popup.add(openItem);
         popup.add(sstopItem);
         popup.add(sstartItem);
