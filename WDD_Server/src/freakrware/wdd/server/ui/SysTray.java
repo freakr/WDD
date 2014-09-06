@@ -26,11 +26,14 @@ public class SysTray implements WDD_interface{
 	final static Image IMAGE_START = set_image("A");
 	ThreadPooledServer server;
 	public SocketAddress clientip;
+	public boolean uiclosed = false;
 	private DataBase DB;
+	private UI ui;
 	
-	public SysTray(ThreadPooledServer server, DataBase DB) {
+	public SysTray(ThreadPooledServer server, DataBase DB, UI ui) {
 		this.server = server ;
 		this.DB = DB;
+		this.ui = ui;
 	}
 	public void start() {
 	
@@ -42,6 +45,15 @@ public class SysTray implements WDD_interface{
             public void actionPerformed(ActionEvent e) {
         		server.stop();
                 System.exit(0);
+        	}
+
+        };
+        ActionListener open = new ActionListener() {
+        	@Override
+            public void actionPerformed(ActionEvent e) {
+        		if(!ui.isVisible()){
+        			ui.setVisible(true);
+        		}
         	}
 
         };
@@ -76,12 +88,16 @@ public class SysTray implements WDD_interface{
         MenuItem sstopItem = new MenuItem();
         sstopItem.addActionListener(serverstop);
         sstopItem.setLabel("Server-Stop");
+        MenuItem openItem = new MenuItem();
+        openItem.addActionListener(open);
+        openItem.setLabel("OPEN");
         MenuItem sstartItem = new MenuItem();
         sstartItem.addActionListener(serverstart);
         sstartItem.setLabel("Server-(Re)-Start");
         MenuItem endItem = new MenuItem();
         endItem.addActionListener(beenden);
         endItem.setLabel("WDD_Server Beenden");
+        popup.add(openItem);
         popup.add(sstopItem);
         popup.add(sstartItem);
         popup.add(endItem);

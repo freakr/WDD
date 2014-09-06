@@ -27,6 +27,7 @@ public class CheckUserOnline implements Runnable,WDD_interface,SFCP_interface{
 			result = DB.checkuseronline();
 			for(int x = 0; x < result.length;x++){
 				new Thread(new Client(setup,DB.lastip(result[x]),REQUEST_NEW_MESSAGES_FROM_BOARD, new String[] {result[x]})).start();
+				//TODO send receiver to app
 			}
 		}
 		
