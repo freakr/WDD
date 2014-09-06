@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class SFCP implements WDD_interface {
+public class SFCP implements SFCP_interface,WDD_interface{
 
 	private String line;
 	private BufferedReader input;
