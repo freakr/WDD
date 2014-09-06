@@ -51,7 +51,7 @@ public class ThreadPooledServer implements Runnable,WDD_interface{
             tray.clientip = clientSocket.getLocalSocketAddress();
             tray.update("C");
             this.threadPool.execute(
-                new WorkerRunnable(clientSocket,tray,setup,DB));
+                new ServerRunnable(clientSocket,tray,setup,DB));
         }
         tray.update(setup.get_Parameter(SERVERSTATUS));
         this.threadPool.shutdownNow();

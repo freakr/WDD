@@ -11,6 +11,7 @@ public interface WDD_interface {
 	static final String CONNECTION_KEEP = "Connection_Keep";
 	static final String DB_UPDATE_FULL = "DB_Full_Update";
 	static final String ACTION_COMPLETE = "Action_Complete";
+	static final String ERROR = "Error";
 	static final String FILE_COMPLETE = "File_Complete";
 	static final String REQUEST_DB_FILES = "Request_DB_Files";
 	static final String REQUEST_URL = "Request_Url";
@@ -42,7 +43,7 @@ public interface WDD_interface {
 	static final String DB_FOLDER = "WDDData/";
 	static final String DB_NAME = "DBWDD";
 	// DataBase Table-Names
-	final static String DB_TABLE_USER = "UserName";
+	final static String DB_TABLE_USER = "User";
 	final static String DB_TABLE_MESSAGES = "Messages";
 	final static String DB_TABLE_MESSAGEBOARD = "Messageboard";
 	// DataBase Columns
@@ -59,6 +60,8 @@ public interface WDD_interface {
 	final static String DB_COL_INCOMINGDATE = "IncomingDate";
 	// DataBase Getter
 	final static String[] GETTER_USER_EXISTS = {DB_COL_USERID};
+	final static String[] GETTER_LASTIP = {DB_COL_LASTUSERIP};
+	final static String[] GETTER_USER_ONLINE = {DB_COL_USERNAME};
 	final static String[] GETTER_USER_NAME = {DB_COL_USERNAME};
 	final static String[] GETTER_MESSAGE_EXISTS = {DB_COL_MESSAGEID};
 	final static String[] GETTER_MESSAGE = {DB_COL_MESSAGETEXT};

@@ -4,43 +4,121 @@ import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-/**
- * String formatted Connection Protokoll
- */
-
-public class SFCP_Server implements WDD_interface{
+public class SFCP implements WDD_interface {
 
 	private String line;
 	private BufferedReader input;
 	private PrintWriter output;
+	private String[] arguments;
+	private Socket server;
+	private String command;
 	private DataBase DB;
 
-	public SFCP_Server(String line, BufferedReader input, PrintWriter output, DataBase DB) throws IOException {
+	public SFCP(String line, BufferedReader input, PrintWriter output, String[] arguments, Socket server, String command) throws IOException {
+		this.line = line;
+		this.input = input;
+		this.output = output;
+		this.arguments = arguments;
+		this.server = server;
+		this.command = command;
+		client();
+	}
+	public SFCP(String line, BufferedReader input, PrintWriter output, DataBase DB) throws IOException {
 		this.line = line;
 		this.input = input;
 		this.output = output;
 		this.DB = DB;
-		work();
+		server();
 	}
 
-	private void work() throws IOException {
-		switch(line){
-    	case CONNECTION_KEEP:
-    		try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e2) {
-				e2.printStackTrace();
+	private void client() throws IOException {
+		switch (line) {
+		case CONNECTION_CLOSE:
+			output.println(line);
+			server.shutdownInput();
+			server.shutdownOutput();
+			server.close();
+			break;
+		case ONLINESTATUS:
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
 			}
-    		output.println(CONNECTION_KEEP);
+			break;
+		case REQUEST_URL:
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
     		break;
+		case REQUEST_NEW_MESSAGES_FROM_BOARD:
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
+			line = input.readLine();
+			System.out.println(line);
+			if(line.equals(NO_NEW_MESSAGES_FROM_BOARD)){
+				output.println(CONNECTION_CLOSE);
+				break;
+			}
+			else{
+				String[][] messages = new String[Integer.parseInt(line)/3][3];
+				for(int x=0;x< (Integer.parseInt(line)/3);x++){
+					messages[x][0] = input.readLine();
+					System.out.println(messages[x][0]);
+					messages[x][1] = input.readLine();
+					System.out.println(messages[x][1]);
+					messages[x][2] = input.readLine();
+					System.out.println(messages[x][2]);
+				}
+				output.println(ALL_MESSAGES_RECEIVED);
+			}
+			break;
+		case REQUEST_ADD_MESSAGE:
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
+    		break;
+		case REQUEST_ADD_USER:
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
+    		break;
+		case REQUEST_REMOVE_USER:
+			for(int x=0;x < arguments.length;x++){
+				output.println(arguments[x]);
+			}
+    		break;
+		case CONNECTION_ACCEPTED:
+			output.println(command);
+			break;
+		case ACTION_COMPLETE:
+			output.println(CONNECTION_CLOSE);
+			break;
+		default:
+			output.println(CONNECTION_CLOSE);
+			
+		}
+		
+	}
+	
+	private void server() throws IOException {
+		switch(line){
     	case CONNECTION_CLOSE:
     		output.println(CONNECTION_CLOSE);
     		output.close();
     		input.close();
-			
+			break;
+    	case ONLINESTATUS:
+    		output.println(line);
+    		if(DB.user_online(input.readLine(),input.readLine(),input.readLine())){
+    			output.println(ACTION_COMPLETE);
+    		}
+    		else{
+    			output.println(ERROR);
+    		}
     		break;
     	case CONNECTION_REQUEST:
     		output.println(CONNECTION_ACCEPTED);
@@ -180,5 +258,4 @@ public class SFCP_Server implements WDD_interface{
     	}
 		
 	}
-
 }

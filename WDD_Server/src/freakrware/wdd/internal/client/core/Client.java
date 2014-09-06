@@ -9,7 +9,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import freakrware.wdd.server.resources.SFCP_Client;
+import freakrware.wdd.server.resources.SFCP;
 import freakrware.wdd.server.resources.Server_Setup;
 import freakrware.wdd.server.resources.WDD_interface;
 
@@ -47,7 +47,7 @@ public class Client implements Runnable, WDD_interface {
 			String line;
 			while ((line = input.readLine()) != null) {
 				System.out.println(line);
-				new SFCP_Client(line,input,output,setup,arguments,server,command);
+				new SFCP(line,input,output,arguments,server,command);
 				}
 		} catch (IOException e) {
 			if (command.equals(CONNECTION_KEEP)) {

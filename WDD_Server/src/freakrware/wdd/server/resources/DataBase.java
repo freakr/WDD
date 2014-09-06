@@ -34,6 +34,35 @@ public class DataBase implements WDD_interface{
 		initialise_database();
 		
 	}
+	public boolean user_online(String user, String onlinestatus, String lastip) {
+		String status;
+		if(onlinestatus.equals(ONLINESTATUS_ON)){
+			status = "TRUE";
+		}
+		else{
+			status = "FALSE";
+		}
+			
+		set_strsql("UPDATE "+DB_TABLE_USER+" SET "+DB_COL_USERONLINESTATUS+" = "+status+" WHERE "+DB_COL_USERNAME+" = '" + user+"'");
+		if(set_data()){
+			set_strsql("UPDATE "+DB_TABLE_USER+" SET "+DB_COL_LASTUSERIP+" = '"+lastip+"' WHERE "+DB_COL_USERNAME+" = '" + user+"'");
+		return set_data();
+		}
+		else{
+			return false;
+		}
+	}
+
+	public String[] checkuseronline() {
+		set_strsql("SELECT "+DB_COL_USERNAME+" FROM "+DB_TABLE_USER+" WHERE "+DB_COL_USERONLINESTATUS+" = TRUE");
+		
+		return get_data(GETTER_USER_ONLINE);
+	}
+	public String lastip(String username) {
+		set_strsql("SELECT "+DB_COL_LASTUSERIP+" FROM "+DB_TABLE_USER+" WHERE "+DB_COL_USERNAME+" = '"+ username +"'");
+		String[] ip = get_data(GETTER_LASTIP);
+		return ip[0];
+	}
 	public int user_exists(String name){
 		set_strsql("SELECT "+DB_COL_USERID+" FROM "+DB_TABLE_USER+" WHERE "+DB_COL_USERNAME+" = '"+ name +"'");
 		
@@ -73,7 +102,7 @@ public class DataBase implements WDD_interface{
 		return set_data();
 	}
 	public boolean messages_senttrue(String actionid) {
-		strsql = "UPDATE "+DB_TABLE_MESSAGEBOARD+" SET "+DB_COL_SENTTRUE+" = TRUE WHERE "+DB_COL_ACTIONID+" = " + actionid; 
+		set_strsql("UPDATE "+DB_TABLE_MESSAGEBOARD+" SET "+DB_COL_SENTTRUE+" = TRUE WHERE "+DB_COL_ACTIONID+" = " + actionid); 
 		
 		return set_data();
 	}
@@ -244,6 +273,8 @@ public class DataBase implements WDD_interface{
 	        }
 	    });
 	}
+
+	
 
 	
 	

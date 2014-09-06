@@ -8,11 +8,14 @@ public class ServerMain implements WDD_interface{
 
 	public static void main(String[] args) {
 		DataBase DB = new DataBase();
-		ThreadPooledServer server = new ThreadPooledServer(PORT,DB);
-		SysTray st = new SysTray(server,DB);
-		server.tray = st;
+		ThreadPooledServer TPserver = new ThreadPooledServer(PORT,DB);
+		CheckUserOnline CUO = new CheckUserOnline();
+		SysTray st = new SysTray(TPserver,DB);
+		TPserver.tray = st;
+		CUO.server = TPserver;
 		st.start();
-		new Thread(server).start();
+		new Thread(TPserver).start();
+		new Thread(CUO).start();
 	}
 
 }
