@@ -23,8 +23,9 @@ import javax.swing.table.DefaultTableModel;
 
 import freakrware.wdd.server.core.ThreadPooledServer;
 import freakrware.wdd.server.resources.DataBase;
+import freakrware.wdd.server.resources.Interfaces;
 
-public class UI extends JFrame {
+public class UI extends JFrame implements Interfaces{
 
 	/**
 	 * 
@@ -88,11 +89,12 @@ public class UI extends JFrame {
 		refresh_ui();
 		setVisible(true);
 		
-        endItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-            	System.exit(EXIT_ON_CLOSE);
-            }
-        });
+        endItem.addActionListener(beenden);//new ActionListener() {
+            //public void actionPerformed(ActionEvent evt) {
+            	//server.stop();
+            	//System.exit(0);
+            //}
+        //});
 	}
 	public void refresh_ui(){
 		refreshTableData();

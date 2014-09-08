@@ -40,14 +40,14 @@ public class SysTray implements Interfaces{
 	
     if (SystemTray.isSupported()) {
         SystemTray tray = SystemTray.getSystemTray();
-        ActionListener beenden = new ActionListener() {
-        	@Override
-            public void actionPerformed(ActionEvent e) {
-        		server.stop();
-                System.exit(0);
-        	}
+        //ActionListener beenden = new ActionListener() {
+        	//@Override
+            //public void actionPerformed(ActionEvent e) {
+        		//server.stop();
+                //System.exit(0);
+        	//}
 
-        };
+    //};
         ActionListener open = new ActionListener() {
         	@Override
             public void actionPerformed(ActionEvent e) {

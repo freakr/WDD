@@ -18,16 +18,12 @@ public class CheckUserOnline implements Runnable,Interfaces{
 		t.setName("CheckUserOnline" + " - Thread");
 		String[] result;
 		while(!server.isStopped){
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			result = DB.checkuseronline();
 			for(int x = 0; x < result.length;x++){
 				new Thread(new Client(setup,DB.lastip(result[x]),REQUEST_NEW_MESSAGES_FROM_BOARD, new String[] {result[x]})).start();
 				//TODO send receiver to app
 			}
+			standard.wait(1000);
 		}
 		
 	}
