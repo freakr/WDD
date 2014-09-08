@@ -9,9 +9,22 @@ public class Client_Main implements WDD_interface,SFCP_interface{
 	public static void main(String[] args) {
 		Server_Setup setup = new Server_Setup();
 		//connection_keep();
-		//new Thread(new Client(setup,LOCALHOST,REQUEST_ADD_MESSAGE, new String[] {"FreakR","FreakR1","TEST 3"})).start();
+		new Thread(new Client(setup,LOCALHOST,REQUEST_ADD_MESSAGE, new String[] {"FreakR","FreakR1","TEST 9"})).start();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//new Thread(new Client(setup,LOCALHOST,REQUEST_NEW_MESSAGES_FROM_BOARD, new String[] {"FreakR1"})).start();
-		new Thread(new Client(setup,LOCALHOST,ONLINESTATUS, new String[] {"FreakR1",ONLINESTATUS_OFF,LOCALHOST})).start();
+		//new Thread(new Client(setup,LOCALHOST,ONLINESTATUS, new String[] {"FreakR1",ONLINESTATUS_ON,LOCALHOST})).start();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//new Thread(new Client(setup,LOCALHOST,ONLINESTATUS, new String[] {"FreakR1",ONLINESTATUS_OFF,LOCALHOST})).start();
 		//new Thread(new Client(setup,LOCALHOST,REQUEST_ADD_USER, new String[] {"FreakR1"})).start();
 	}
 	

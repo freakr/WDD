@@ -85,24 +85,25 @@ public class UI extends JFrame {
         setJMenuBar(menubar);
         getContentPane().add(main, BorderLayout.LINE_START);
 		getContentPane().add(new JScrollPane(table), BorderLayout.SOUTH);
-		refreshTableData();
-		reload();
-		pack();
-        setVisible(true);
-        
+		refresh_ui();
+		setVisible(true);
+		
         endItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	System.exit(EXIT_ON_CLOSE);
             }
         });
 	}
-	
+	public void refresh_ui(){
+		refreshTableData();
+		reload();
+		pack();
+        
+	}
 	private void refreshTableData(){
         Vector results = new DataBase().get_messageboard();
-        if(results.size()!=0){
         MyTableModel.setDataVector(results, COLUMN_IDENTIFIERS);
         MyTableModel.fireTableDataChanged();
-        }
 	}
 	private void reload() {
 		 

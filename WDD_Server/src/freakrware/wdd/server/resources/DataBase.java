@@ -57,7 +57,7 @@ public class DataBase implements DataBase_interface,WDD_interface{
 	public Vector<String> get_messageboard() {
 		Vector result = new Vector();
 		
-		set_strsql("SELECT * FROM "+DB_TABLE_MESSAGEBOARD);
+		set_strsql("SELECT * FROM "+DB_TABLE_MESSAGEBOARD+" WHERE "+DB_COL_SENTTRUE+" = FALSE");
 		String[] middleresult = get_data(GETTER_MESSAGEBOARD);
 		for(int x=0;x<middleresult.length;x=x+6){
 			Vector dataindex = new Vector();
