@@ -1,11 +1,9 @@
 package freakrware.wdd.internal.client.core;
 
-import freakrware.wdd.server.resources.SFCP_interface;
+import freakrware.wdd.server.resources.Interfaces;
 import freakrware.wdd.server.resources.Server_Setup;
-import freakrware.wdd.server.resources.Standards_interface;
-import freakrware.wdd.server.resources.WDD_interface;
 
-public class Client_Main implements WDD_interface,SFCP_interface,Standards_interface{
+public class Client_Main implements Interfaces{
 	
 	public static void main(String[] args) {
 		Server_Setup setup = new Server_Setup();

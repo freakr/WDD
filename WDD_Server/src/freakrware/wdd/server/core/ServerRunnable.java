@@ -7,13 +7,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import freakrware.wdd.server.resources.DataBase;
+import freakrware.wdd.server.resources.Interfaces;
 import freakrware.wdd.server.resources.SFCP;
-import freakrware.wdd.server.resources.SFCP_interface;
 import freakrware.wdd.server.resources.Server_Setup;
-import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
 
-public class ServerRunnable implements Runnable,WDD_interface,SFCP_interface{
+public class ServerRunnable implements Runnable,Interfaces{
 
     protected Socket clientSocket = null;
     private SysTray tray;

@@ -1,11 +1,11 @@
 package freakrware.wdd.server.core;
 
 import freakrware.wdd.server.resources.DataBase;
-import freakrware.wdd.server.resources.WDD_interface;
+import freakrware.wdd.server.resources.Interfaces;
 import freakrware.wdd.server.ui.SysTray;
 import freakrware.wdd.server.ui.UI;
 
-public class ServerMain implements WDD_interface{
+public class ServerMain implements Interfaces{
 
 	public static void main(String[] args) {
 		DataBase db = new DataBase();

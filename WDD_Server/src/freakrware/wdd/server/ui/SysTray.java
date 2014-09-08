@@ -16,11 +16,11 @@ import java.net.SocketAddress;
 
 import freakrware.wdd.server.core.ThreadPooledServer;
 import freakrware.wdd.server.resources.DataBase;
-import freakrware.wdd.server.resources.WDD_interface;
+import freakrware.wdd.server.resources.Interfaces;
 
 
 
-public class SysTray implements WDD_interface{
+public class SysTray implements Interfaces{
 
 	TrayIcon trayIcon = null;
 	final static Image IMAGE_START = set_image("A");

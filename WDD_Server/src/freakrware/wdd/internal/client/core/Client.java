@@ -9,12 +9,11 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import freakrware.wdd.server.resources.Interfaces;
 import freakrware.wdd.server.resources.SFCP;
-import freakrware.wdd.server.resources.SFCP_interface;
 import freakrware.wdd.server.resources.Server_Setup;
-import freakrware.wdd.server.resources.WDD_interface;
 
-public class Client implements Runnable, WDD_interface,SFCP_interface {
+public class Client implements Runnable,Interfaces {
 	public String command;
 	private String host;
 	private int port;

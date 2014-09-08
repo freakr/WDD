@@ -7,11 +7,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import freakrware.wdd.server.resources.DataBase;
+import freakrware.wdd.server.resources.Interfaces;
 import freakrware.wdd.server.resources.Server_Setup;
-import freakrware.wdd.server.resources.WDD_interface;
 import freakrware.wdd.server.ui.SysTray;
 
-public class ThreadPooledServer implements Runnable,WDD_interface{
+public class ThreadPooledServer implements Runnable,Interfaces{
 
     protected int          serverPort;
     protected ServerSocket serverSocket = null;

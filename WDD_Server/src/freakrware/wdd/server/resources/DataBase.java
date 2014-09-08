@@ -15,7 +15,7 @@ import java.util.Vector;
 import android.os.Environment;
 
 
-public class DataBase implements DataBase_interface,WDD_interface{
+public class DataBase implements Interfaces{
 
 	private static Connection dbVerbindung = null;
 	private static Statement stmt = null;

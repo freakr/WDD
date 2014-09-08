@@ -2,11 +2,10 @@ package freakrware.wdd.server.core;
 
 import freakrware.wdd.internal.client.core.Client;
 import freakrware.wdd.server.resources.DataBase;
-import freakrware.wdd.server.resources.SFCP_interface;
+import freakrware.wdd.server.resources.Interfaces;
 import freakrware.wdd.server.resources.Server_Setup;
-import freakrware.wdd.server.resources.WDD_interface;
 
-public class CheckUserOnline implements Runnable,WDD_interface,SFCP_interface{
+public class CheckUserOnline implements Runnable,Interfaces{
 	
 	private DataBase DB = new DataBase();
 	ThreadPooledServer server;
